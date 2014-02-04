@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+.my-link-button {
+	cursor: pointer;
+	padding: 10px 10px;
+	background-color: olive;
+	font-size: 15px;
+	margin: 10px 10px;
+	text-decoration: none;
+}
