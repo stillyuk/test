@@ -1,0 +1,15 @@
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	ok
+	<hr />
+	#foreach($new in $news)
+		#set( $dateDir = $!dateTools.format("yyyy-MM-dd", $new.newsDate) )
+		#set( $link = $!dateDir + "/" + $!new.id + ".htm" )
+		标题: <a href="$!link">$!new.title</a><br /> 
+	#end
+	<hr />
+</body>
+</html>

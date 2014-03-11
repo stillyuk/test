@@ -1,0 +1,12 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新闻</title>
+</head>
+<body>
+	#foreach($new in $news)
+		<h1>$!new.title</h1>
+		<p>$!new.news<p>
+	#end
+</body>
+</html>
