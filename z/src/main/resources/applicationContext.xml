@@ -11,6 +11,7 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+	<context:component-scan base-package="news" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName">
 			<value>com.mysql.jdbc.Driver</value>
@@ -39,6 +40,28 @@
 		</property>
 		<property name="annotatedClasses">
 			<value>news.News</value>
+		</property>
+	</bean>
+	<bean id="jobTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartzJob" />
+		</property>
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+	<bean id="trigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0/5, 0, 0, *, *, *</value>
+		</property>
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="trigger">
+			<ref bean="trigger" />
 		</property>
 	</bean>
 </beans>
