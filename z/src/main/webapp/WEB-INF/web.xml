@@ -29,6 +29,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>webmvc</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.ns</url-pattern>
 	</servlet-mapping>
 </web-app>

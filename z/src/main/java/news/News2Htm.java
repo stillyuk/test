@@ -11,7 +11,7 @@ public class News2Htm {
 		for (int i = 0; i < news.size(); i++) {
 			String dir = new SimpleDateFormat("yyyy-MM-dd").format(news.get(i)
 					.getNewsDate());
-			String urlPath = "http://localhost:8080/z/news/show?id="
+			String urlPath = "http://localhost:8080/z/news/show.ns?id="
 					+ news.get(i).getId() + "&dir=" + dir;
 			URL url;
 			try {

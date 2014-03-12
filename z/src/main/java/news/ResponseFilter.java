@@ -28,7 +28,7 @@ public class ResponseFilter implements Filter {
 
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
-		if (req.getRequestURI().endsWith("add")) {
+		if (req.getRequestURI().endsWith("add.ns")) {
 			chain.doFilter(request, response);
 			return;
 		}
