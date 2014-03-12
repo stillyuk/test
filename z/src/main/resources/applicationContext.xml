@@ -51,17 +51,17 @@
 			<value>work</value>
 		</property>
 	</bean>
-	<bean id="trigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail">
 			<ref bean="jobTask" />
 		</property>
 		<property name="cronExpression">
-			<value>0/5, 0, 0, *, *, *</value>
+			<value>0/5 * * * * ?</value>
 		</property>
 	</bean>
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="trigger">
-			<ref bean="trigger" />
+		<property name="triggers">
+			<list><ref bean="trigger" /></list>
 		</property>
 	</bean>
 </beans>
