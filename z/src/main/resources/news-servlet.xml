@@ -14,4 +14,24 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+	<context:component-scan base-package="news" />
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+	<bean id="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" />
+		<property name="configLocation" value="classpath:velocity.properties" />
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="dateToolAttribute">
+			<value>dateTools</value>
+		</property>
+		<property name="numberToolAttribute">
+			<value>numberTool</value>
+		</property>
+		<property name="suffix" value=".vm" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+
 </beans>
