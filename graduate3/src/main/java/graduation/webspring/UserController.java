@@ -17,26 +17,27 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2014-03-12 12:57
  */
 @Controller
+@RequestMapping("/user/")
 public class UserController {
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	public ModelAndView login(User user) {
-		return new ModelAndView("user/login", "tip", "");
+		return new ModelAndView("login", "tip", "");
 	}
 
-	@RequestMapping("signIn")
+	@RequestMapping("/signIn")
 	public ModelAndView signIn(User user) {
 		List<User> users = userService.query(user);
 		if (users == null || users.size() == 0) {
-			return new ModelAndView("user/login", "tip", "登陆失败");
+			return new ModelAndView("login", "tip", "登陆失败");
 		}
 		if (users.size() != 1) {
 			return new ModelAndView("system/error");
 		}
-		return new ModelAndView("user/home", "username", users.get(0).getUsername());
+		return new ModelAndView("home", "username", users.get(0).getUsername());
 	}
 }
