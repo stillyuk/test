@@ -21,7 +21,7 @@ public class News {
 	@Column(name = "TITLE", length = 100)
 	private String title;
 
-	@Column(name = "NEWS", length = 1000)
+	@Column(name = "NEWS", length = 2000)
 	private String news;
 
 	@Column(name = "TOP")

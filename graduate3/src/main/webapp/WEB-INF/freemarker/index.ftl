@@ -10,7 +10,7 @@ p {
 </style>
 </head>
 <body>
-	<a href="login">用户登陆</a>
+	<a href="user/login">用户登陆</a>
 	<h3>Design and development of team information management system supported by multi-platform</h3>
 	<p>课题要解决的主要问题和具体要求：</p>
 	<p>

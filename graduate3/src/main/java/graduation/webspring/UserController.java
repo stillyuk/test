@@ -26,7 +26,18 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public ModelAndView login(User user) {
-		return new ModelAndView("login", "tip", "");
+		return new ModelAndView("user/login", "tip", "");
+	}
+
+	@RequestMapping("/registe")
+	public ModelAndView registe() {
+		return new ModelAndView("user/registe");
+	}
+
+	@RequestMapping("/signUp")
+	public ModelAndView signUp(User user) {
+		userService.add(user);
+		return new ModelAndView("user/registe");
 	}
 
 	@RequestMapping("/signIn")

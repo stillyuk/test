@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
+@Entity(name = "ROLE")
 public class Role {
 	@Id
 	@GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
@@ -15,7 +15,7 @@ public class Role {
 	@Column(name = "UUID", length = 36)
 	private String uuid;
 
-	@Column(name = "ROLE_NAME", length = 32)
+	@Column(name = "ROLE_NAME", length = 33)
 	private String roleName;
 
 	public String getUuid() {

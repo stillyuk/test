@@ -33,4 +33,12 @@ public class UserDao {
 		session.close();
 		return users;
 	}
+
+	public void add(User user) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.save(user);
+		tx.commit();
+		session.close();
+	}
 }

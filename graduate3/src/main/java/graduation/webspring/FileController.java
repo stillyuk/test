@@ -35,19 +35,25 @@ public class FileController {
 					+ file.getOriginalFilename()));
 		} catch (Exception e) {
 		}
-		return null;
+		return new ModelAndView("/file/upload");
 	}
 
 	@RequestMapping("/download")
-	public ResponseEntity<byte[]> download() throws Exception {
-		if (logger.isInfoEnabled()) {
-			logger.info("download");
-		}
+	public ResponseEntity<byte[]> download(String fileName) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		headers.setContentDispositionFormData("attachment", "jQuery.pptx");
+		headers.setContentDispositionFormData("attachment", fileName);
+		String filePath = "D:" + File.separatorChar + "SPRING"
+				+ File.separatorChar + fileName;
 		return new ResponseEntity<byte[]>(
-				FileUtils.readFileToByteArray(new File("D:/SPRING/jQuery.pptx")),
-				headers, HttpStatus.CREATED);
+				FileUtils.readFileToByteArray(new File(filePath)), headers,
+				HttpStatus.CREATED);
+	}
+
+	@RequestMapping("/showAllFiles")
+	public ModelAndView showAllFiles() {
+		File file = new File("D:" + File.separatorChar
+				+ "SPRING");
+		return new ModelAndView("/file/showAllFiles", "allFiles", file.listFiles());
 	}
 }

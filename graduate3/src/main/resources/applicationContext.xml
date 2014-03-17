@@ -34,16 +34,14 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
-				<!-- <prop key="hibernate.show_sql">true</prop> -->
-				<!-- <prop key="hibernate.format_sql">true</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
-		<property name="annotatedClasses">
+		<property name="packagesToScan">
 			<list>
-				<value>graduation.domain.User</value>
-				<value>graduation.domain.Role</value>
-				<value>graduation.domain.News</value>
+				<value>graduation.domain</value>
 			</list>
 		</property>
 	</bean>

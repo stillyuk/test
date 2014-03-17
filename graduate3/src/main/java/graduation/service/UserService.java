@@ -20,4 +20,8 @@ public class UserService {
 	public List<User> query(User user) {
 		return userDao.query(user);
 	}
+
+	public void add(User user) {
+		userDao.add(user);
+	}
 }
