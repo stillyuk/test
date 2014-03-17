@@ -22,12 +22,12 @@ public class User {
 	@Column(name = "UUID", length = 36)
 	private String uuid;
 
-	@Column(name = "USERNAME", length = 33)
+	@Column(name = "USERNAME", unique = true, length = 33)
 	private String username;
 
 	@Column(name = "EMAIL", length = 33)
 	private String email;
-	
+
 	@Column(name = "PASSWORD", length = 33)
 	private String password;
 
@@ -62,4 +62,29 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+
 }
