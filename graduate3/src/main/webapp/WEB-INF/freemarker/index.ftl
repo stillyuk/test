@@ -7,10 +7,17 @@
 p {
 	text-indent: 2em;
 }
+div {
+	position: relative;
+	float: right;
+}
 </style>
 </head>
 <body>
-	<a href="user/login">用户登陆</a>
+	<div>
+		<a href="user/login">用户登陆</a>
+		<a href="user/registe">注册</a>
+	</div>
 	<h3>Design and development of team information management system supported by multi-platform</h3>
 	<p>课题要解决的主要问题和具体要求：</p>
 	<p>

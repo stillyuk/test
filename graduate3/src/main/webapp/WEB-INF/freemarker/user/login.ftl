@@ -14,7 +14,7 @@
 				用户名：<input class="form-input" type="text" name="username" />
 				密码：<input class="form-input" type="text" name="password" />
 				<input class="form-button" type="submit" value="登陆" />
-				<a href="">免费注册</a>
+				<a href="registe">免费注册</a>
 			</div>
 		</form>
 	</div>

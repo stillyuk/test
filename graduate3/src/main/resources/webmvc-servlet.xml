@@ -13,11 +13,12 @@
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-
+	<aop:aspectj-autoproxy />
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-	<context:component-scan base-package="graduation.webspring" />
+	<context:component-scan base-package="graduation.webspring, graduation.aop" />
 	<mvc:resources mapping="/css/**" location="/WEB-INF/freemarker/css/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/freemarker/js/" />
 
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -25,7 +26,7 @@
 			<value>/WEB-INF/freemarker</value>
 		</property>
 	</bean>
-	<bean id="viewResolver"
+	<bean
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="suffix">
 			<value>.ftl</value>
@@ -34,7 +35,12 @@
 			<value>text/html</value>
 		</property>
 	</bean>
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<bean id="mappingJackson2HttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>

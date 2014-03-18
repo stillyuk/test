@@ -1,6 +1,7 @@
 package graduation.core;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,8 @@ public class Context {
 	private int serverPort;
 
 	private String contextPath;
+
+	private ThreadLocal<HttpSession> session;
 
 	public void setContext(HttpServletRequest request) {
 		this.schema = request.getScheme();
@@ -57,4 +60,11 @@ public class Context {
 		this.contextPath = contextPath;
 	}
 
+	public ThreadLocal<HttpSession> getSession() {
+		return session;
+	}
+
+	public void setSession(ThreadLocal<HttpSession> session) {
+		this.session = session;
+	}
 }

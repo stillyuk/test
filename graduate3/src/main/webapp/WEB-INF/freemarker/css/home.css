@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.user {
+	float: right;
+}
+.navigation {
+	margin: 20px 40px;
+}
+
+.navigation-menu {
+	float: left;
+	margin: 5px 10px;
+}

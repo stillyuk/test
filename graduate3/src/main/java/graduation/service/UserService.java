@@ -21,6 +21,10 @@ public class UserService {
 		return userDao.query(user);
 	}
 
+	public List<User> queryByUsername(User user) {
+		return userDao.queryByUsername(user);
+	}
+
 	public void add(User user) {
 		userDao.add(user);
 	}

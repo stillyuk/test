@@ -40,6 +40,7 @@ public class FileController {
 
 	@RequestMapping("/download")
 	public ResponseEntity<byte[]> download(String fileName) throws Exception {
+		if (fileName == null) return null;
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDispositionFormData("attachment", fileName);

@@ -34,6 +34,18 @@ public class UserDao {
 		return users;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<User> queryByUsername(User user) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.add(Restrictions.eq("username", user.getUsername()));
+		List<User> users = criteria.list();
+		tx.commit();
+		session.close();
+		return users;
+	}
+
 	public void add(User user) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();

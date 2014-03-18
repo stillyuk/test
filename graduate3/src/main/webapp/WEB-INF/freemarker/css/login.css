@@ -28,6 +28,8 @@
 	margin: 5px 0;
 	padding: 4px 6px;
 	box-sizing: border-box;
+	border: 1px solid #CCC;
+	border-radius: 3px;
 }
 
 .form-button {
@@ -38,4 +40,5 @@
 	letter-spacing: 6px;
 	border: 0px;
 	cursor: pointer;
+	border-radius: 3px;
 }

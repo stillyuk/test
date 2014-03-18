@@ -9,7 +9,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -44,11 +46,27 @@ public class UserController {
 	public ModelAndView signIn(User user) {
 		List<User> users = userService.query(user);
 		if (users == null || users.size() == 0) {
-			return new ModelAndView("login", "tip", "登陆失败");
+			return new ModelAndView("user/login", "tip", "用户名或密码错误");
 		}
 		if (users.size() != 1) {
-			return new ModelAndView("system/error");
+			return new ModelAndView("user/login", "tip", "系统错误");
 		}
-		return new ModelAndView("home", "username", users.get(0).getUsername());
+		return new ModelAndView("redirect:/user/" + user.getUsername());
+	}
+
+	@RequestMapping(value = "/checkUsername", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String checkUsername(User user) {
+		List<User> users = userService.queryByUsername(user);
+		if (users == null || users.size() == 0) {
+			return "";
+		}
+		return "此用户已被注册";
+	}
+
+	@RequestMapping(value = "{username}")
+	@ResponseBody
+	public ModelAndView userHome(@PathVariable String username) {
+		return new ModelAndView("user/home");
 	}
 }
