@@ -25,9 +25,13 @@ public class NewsController {
 	@Autowired
 	NewsService newsService;
 
-	@RequestMapping("add")
-	public ModelAndView addNews(News news) {
-		System.out.println("title: " + news.getTitle());
+	@RequestMapping("addNews")
+	public ModelAndView addNews() {
+		return new ModelAndView("news/addNews");
+	}
+	
+	@RequestMapping("doAddNews")
+	public ModelAndView doAddNews(News news) {
 		newsService.add(news);
 		return new ModelAndView("addResult", "title", news.getTitle());
 	}

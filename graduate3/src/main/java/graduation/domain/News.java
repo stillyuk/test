@@ -20,7 +20,7 @@ public class News {
 	@Column(name = "ID", length = 36)
 	private String id;
 
-	@Column(name = "TITLE", length = 100)
+	@Column(name = "TITLE", nullable = false, length = 100)
 	private String title;
 
 	@Column(name = "NEWS", length = 2000)

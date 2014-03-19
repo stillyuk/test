@@ -12,10 +12,12 @@
 		<div class="navigation-menu"><a href="../file/download">下载文件</a></div>
 		<div class="navigation-menu"><a href="../file/download">新建组</a></div>
 	</div>
+	<div>
 		<#if allFiles ??>
-		<#list allFiles as file>
-			<a href="download?fileName=${file.name}">${file.name}</a>
-		</#list>
-	</#if>
+			<#list allFiles as file>
+				<a href="download?fileName=${file.name}">${file.name}</a>
+			</#list>
+		</#if>
+	</div>
 </body>
 </html>

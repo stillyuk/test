@@ -20,7 +20,7 @@ public class Role {
 	@Column(name = "UUID", length = 36)
 	private String uuid;
 
-	@Column(name = "ROLE_NAME", length = 33)
+	@Column(name = "ROLE_NAME", length = 33, unique = true, nullable = false)
 	private String roleName;
 
 	@ManyToMany

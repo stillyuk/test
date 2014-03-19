@@ -20,7 +20,7 @@ public class User {
 	@Column(name = "UUID", length = 36)
 	private String uuid;
 
-	@Column(name = "USERNAME", unique = true, length = 33)
+	@Column(name = "USERNAME", unique = true, nullable = false, length = 33)
 	private String username;
 
 	@Column(name = "EMAIL", length = 33)

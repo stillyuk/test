@@ -4,6 +4,7 @@
 	width: 400px;
 	border: 1px solid #CCC;
 	margin: 70px auto;
+	border-radius: 4px;
 }
 
 .form-head {
@@ -11,6 +12,7 @@
 	font-size: 22px;
 	background-color: olive;
 	color: white;
+	border-radius: 4px;
 }
 
 .form-body {

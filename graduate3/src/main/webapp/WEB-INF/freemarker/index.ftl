@@ -36,5 +36,6 @@ div {
 	<hr/>
 	<#include "news/allNews.ftl">
 	<#include "system/copyright.ftl">
+	<div><a href="admin">管理员登陆</a></div>
 </body>
 </html>

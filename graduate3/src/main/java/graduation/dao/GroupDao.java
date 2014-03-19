@@ -10,11 +10,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author jiangyukun
  * @since 2014-03-19
  */
+@Repository
 public class GroupDao {
 	@Autowired
 	private SessionFactory sessionFactory;

@@ -21,7 +21,7 @@ public class Group {
 	@Column(name = "UUID")
 	private String uuid;
 
-	@Column(name = "GROUP_NAME", length = 33)
+	@Column(name = "GROUP_NAME", length = 33, unique = true, nullable = false)
 	private String groupName;
 
 	@JoinColumn(name = "MANAGER")

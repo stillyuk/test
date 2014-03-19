@@ -14,16 +14,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class FirstInterceptor extends HandlerInterceptorAdapter {
 	protected Log logger = LogFactory.getLog(FirstInterceptor.class);
 
-	/*public boolean preHandle(HttpServletRequest request,
+	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		HttpSession session = request.getSession();
-		String servletPath = request.getServletPath();
-		if (servletPath.equals("/user/home")
-				&& session.getAttribute("username") == null) {
-			response.sendRedirect("/user/login");
-		}
 		return true;
-	}*/
+	}
 
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
@@ -31,6 +25,11 @@ public class FirstInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		if (modelAndView.getModelMap().get("username") != null) {
 			session.setAttribute("username", modelAndView.getModelMap().get("username"));
+		}
+		String servletPath = request.getServletPath();
+		if ((servletPath.equals("/user/home") || servletPath.equals("/group/add"))
+				&& session.getAttribute("username") == null) {
+			modelAndView.setViewName("redirect:/user/login");;
 		}
 	}
 }
