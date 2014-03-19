@@ -4,9 +4,11 @@ import graduation.domain.Group;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -17,13 +19,16 @@ public class GroupDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Group> query() {
+	@SuppressWarnings("unchecked")
+	public List<Group> query(Group group) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		
+		Criteria criteria = session.createCriteria(Group.class);
+		criteria.add(Restrictions.eq("username", group.getUuid()));
+		List<Group> groups = criteria.list();
 		tx.commit();
 		session.close();
-		return null;
+		return groups;
 	}
 
 	public void add(Group group) {

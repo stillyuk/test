@@ -16,4 +16,8 @@ public class GroupService {
 	public void add(Group group) {
 		groupDao.add(group);
 	}
+
+	public void query(Group group) {
+		groupDao.query(group);
+	}
 }
