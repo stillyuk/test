@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -31,9 +29,9 @@ public class User {
 	@Column(name = "PASSWORD", length = 33)
 	private String password;
 
-	@JoinColumn(name = "ROLE_ID")
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Role role;
+	@ManyToMany
+	@JoinTable(name = "ROLE_USER", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	private List<Role> roles;
 
 	@ManyToMany
 	@JoinTable(name = "GROUP_USER", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "GROUP_ID") })
@@ -71,12 +69,12 @@ public class User {
 		this.email = email;
 	}
 
-	public Role getRole() {
-		return role;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	public List<Group> getGroups() {

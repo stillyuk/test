@@ -53,8 +53,7 @@ public class FileController {
 
 	@RequestMapping("/showAllFiles")
 	public ModelAndView showAllFiles() {
-		File file = new File("D:" + File.separatorChar
-				+ "SPRING");
+		File file = new File("D:" + File.separatorChar + "SPRING");
 		return new ModelAndView("/file/showAllFiles", "allFiles", file.listFiles());
 	}
 }

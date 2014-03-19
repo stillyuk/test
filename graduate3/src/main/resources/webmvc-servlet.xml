@@ -16,10 +16,20 @@
 	<aop:aspectj-autoproxy />
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-	<context:component-scan base-package="graduation.webspring, graduation.aop" />
+	<context:component-scan
+		base-package="graduation.aop, graduation.webspring, graduation.interceptor" />
 	<mvc:resources mapping="/css/**" location="/WEB-INF/freemarker/css/" />
 	<mvc:resources mapping="/js/**" location="/WEB-INF/freemarker/js/" />
 
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="order"><value>-1</value></property>
+		<property name="interceptors">
+			<list>
+				<bean parent="firstInterceptor" />
+			</list>
+		</property>
+	</bean>
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">
@@ -34,10 +44,6 @@
 		<property name="contentType">
 			<value>text/html</value>
 		</property>
-	</bean>
-	<bean id="mappingJackson2HttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-
 	</bean>
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />

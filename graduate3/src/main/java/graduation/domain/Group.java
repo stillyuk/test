@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,8 +21,12 @@ public class Group {
 	@Column(name = "UUID")
 	private String uuid;
 
-	@Column(name = "GROUP_NAME")
+	@Column(name = "GROUP_NAME", length = 33)
 	private String groupName;
+
+	@JoinColumn(name = "MANAGER")
+	@ManyToOne
+	private User manager;
 
 	@ManyToMany
 	@JoinTable(name = "GROUP_USER", joinColumns = { @JoinColumn(name = "GROUP_ID") }, inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
@@ -43,6 +48,14 @@ public class Group {
 		this.groupName = groupName;
 	}
 
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
+
 	public List<User> getUsers() {
 		return users;
 	}
@@ -50,5 +63,4 @@ public class Group {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-
 }

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author jiangyukun
@@ -27,6 +28,9 @@ public class ContextFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		ThreadLocal<HttpSession> session = new ThreadLocal<HttpSession>();
+		session.set(httpRequest.getSession());
+		Context.session = session;
 		Context context = new Context();
 		context.setContext(httpRequest);
 		ContextProvider.setContext(context);

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,6 +31,10 @@ public class News {
 
 	@Column(name = "NEWS_DATE")
 	private Date newsDate;
+
+	@JoinColumn(name = "ADDER")
+	@ManyToOne
+	private User user;
 
 	public String getId() {
 		return id;

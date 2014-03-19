@@ -19,7 +19,7 @@ public class Context {
 
 	private String contextPath;
 
-	private ThreadLocal<HttpSession> session;
+	public static ThreadLocal<HttpSession> session;
 
 	public void setContext(HttpServletRequest request) {
 		this.schema = request.getScheme();
@@ -58,13 +58,5 @@ public class Context {
 
 	public void setContextPath(String contextPath) {
 		this.contextPath = contextPath;
-	}
-
-	public ThreadLocal<HttpSession> getSession() {
-		return session;
-	}
-
-	public void setSession(ThreadLocal<HttpSession> session) {
-		this.session = session;
 	}
 }

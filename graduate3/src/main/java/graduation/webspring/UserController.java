@@ -3,6 +3,7 @@ package graduation.webspring;
 import graduation.domain.User;
 import graduation.service.UserService;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -54,6 +55,13 @@ public class UserController {
 		return new ModelAndView("redirect:/user/" + user.getUsername());
 	}
 
+	@RequestMapping(value = "{username}")
+	@ResponseBody
+	public ModelAndView userHome(@PathVariable String username) {
+		File file = new File("D:" + File.separatorChar + "SPRING");
+		return new ModelAndView("user/home", "allFiles", file.listFiles());
+	}
+
 	@RequestMapping(value = "/checkUsername", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String checkUsername(User user) {
@@ -62,11 +70,5 @@ public class UserController {
 			return "";
 		}
 		return "此用户已被注册";
-	}
-
-	@RequestMapping(value = "{username}")
-	@ResponseBody
-	public ModelAndView userHome(@PathVariable String username) {
-		return new ModelAndView("user/home");
 	}
 }

@@ -1,10 +1,12 @@
 package graduation.aop;
 
+import graduation.core.Context;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,12 +22,12 @@ public class SecurityCheck {
 	/**
 	 * @since 2014-03-18 16:59
 	 */
-	@Pointcut("execution(* graduation.webspring.*.*(..))")
-	public void loginCheck() {
-	}
-
-	@Before("execution(* graduation.webspring.*.*(..))")
+//	@Before("execution(* graduation.web.*.userHome(..))")
 	public void start() {
-		logger.warn("aop start");
+		HttpSession session = Context.session.get();
+		if (session != null) {
+			logger.warn(session.getAttribute("username"));
+
+		}
 	}
 }
