@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2014-03-19 17:53
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/system")
 public class SystemController {
 
 	@RequestMapping({ "/", "index" })
