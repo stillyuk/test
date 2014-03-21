@@ -31,6 +31,11 @@ public class RedirectFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		String staticResource = httpRequest.getServletPath();
+		if (staticResource.matches(".*\\.\\w{2,4}")) {
+			chain.doFilter(request, response);
+			return;
+		}
 		String mobile = httpRequest.getParameter("m");
 		String clientRecogition = httpRequest.getHeader("user-agent");
 		RequestDispatcher dispatcher = null;

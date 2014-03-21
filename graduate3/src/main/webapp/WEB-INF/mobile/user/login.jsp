@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>注册</title>
-<link rel="stylesheet" href="../jquery/jquery.mobile.css" />
-<script src="../jquery/jquery.js"></script>
-<script src="../jquery/jquery.mobile.js"></script>
+<link rel="stylesheet" href="/css/mobile/jquery.mobile-1.4.2.css" />
+<script src="/js/jquery-2.1.0.js"></script>
+<script src="/js/mobile/jquery.mobile-1.4.2.js"></script>
 </head>
 <body>
 	<div data-role="page" id="foo">

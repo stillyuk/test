@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-<link rel="stylesheet" type="text/css" href="../css/login.css" />
+<link rel="stylesheet" type="text/css" href="/css/desktop/login.css" />
 </head>
 <body>
 	<div class="center-form">
