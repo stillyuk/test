@@ -1,28 +1,26 @@
 package graduation.filter;
 
-import graduation.core.Context;
-import graduation.core.ContextProvider;
-
 import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
  * @author jiangyukun
- * @since 2014-03-12 15:12
+ * @since 2014-03-21 10:48
  */
-public class ContextFilter implements Filter {
-	Log logger = LogFactory.getLog(ContextFilter.class);
+public class RedirectFilter implements Filter {
+	Log logger = LogFactory.getLog(RedirectFilter.class);
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,14 +30,15 @@ public class ContextFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		logger.warn( httpRequest.getServletPath());
-		ThreadLocal<HttpSession> session = new ThreadLocal<HttpSession>();
-		session.set(httpRequest.getSession());
-		Context.session = session;
-		Context context = new Context();
-		context.setContext(httpRequest);
-		ContextProvider.setContext(context);
-		chain.doFilter(request, response);
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		String clientRecogition = httpRequest.getHeader("user-agent");
+		RequestDispatcher dispatcher = null;
+		if (clientRecogition.matches(".+Mobile.+")) {
+			dispatcher = request.getRequestDispatcher(httpRequest.getServletPath() + ".mobile");
+		} else {
+			dispatcher = request.getRequestDispatcher(httpRequest.getServletPath() + ".do");
+		}
+		dispatcher.forward(httpRequest, httpResponse);
 	}
 
 	@Override
