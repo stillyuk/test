@@ -27,6 +27,7 @@
 		<property name="interceptors">
 			<list>
 				<bean parent="firstInterceptor" />
+				<bean parent="webInterceptor" />
 			</list>
 		</property>
 	</bean>

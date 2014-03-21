@@ -1,5 +1,10 @@
 package graduation.webstruts;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -10,7 +15,10 @@ import com.opensymphony.xwork2.ActionSupport;
 public class UserAction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
-		addActionError("aaa");
+		HttpServletRequest request = (HttpServletRequest) ActionContext
+				.getContext().get(ServletActionContext.HTTP_REQUEST);
+		request.setAttribute("a", "a");
+		ActionContext.getContext().put("b", "b");
 		return super.execute();
 	}
 }

@@ -9,6 +9,10 @@
 <title>struts2</title>
 </head>
 <body>
+
+	<s:property value="#request.a" />
+	<s:property value="b" />
+
 	<h1>Struts2 index</h1>
 	<s:actionerror/>
 </body>
