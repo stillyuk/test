@@ -31,9 +31,10 @@ public class RedirectFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		String mobile = httpRequest.getParameter("m");
 		String clientRecogition = httpRequest.getHeader("user-agent");
 		RequestDispatcher dispatcher = null;
-		if (clientRecogition.matches(".+Mobile.+")) {
+		if ((mobile != null && mobile.equals("m")) || clientRecogition.matches(".+Mobile.+")) {
 			dispatcher = request.getRequestDispatcher(httpRequest.getServletPath() + ".mobile");
 		} else {
 			dispatcher = request.getRequestDispatcher(httpRequest.getServletPath() + ".do");
