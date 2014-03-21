@@ -3,10 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<META http-equiv="Refresh" content="30">
+<title>注册</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>注册</title>
 <link rel="stylesheet" href="/css/mobile/jquery.mobile-1.4.2.css" />
 <script src="/js/jquery-2.1.0.js"></script>
 <script src="/js/mobile/jquery.mobile-1.4.2.js"></script>
@@ -18,7 +17,7 @@
 		</div>
 		<div role="main" class="ui-content">
 			<br/>
-			<form>
+			<form action="signIn">
 				<label for="username">用户名：</label>
 				<input type="text" id="username" name="username" placeholder="Username" value="" data-clear-btn="true">
 				<label for="password">密码：</label>

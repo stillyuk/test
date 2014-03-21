@@ -5,6 +5,9 @@
 <title></title>
 </head>
 <body>
-	文件上传成功
+	<form method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="submit" value="开始上传" />
+	</form>
 </body>
 </html>

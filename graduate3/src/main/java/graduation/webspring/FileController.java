@@ -25,6 +25,11 @@ public class FileController {
 
 	@RequestMapping("/upload")
 	public ModelAndView upload(MultipartFile file) {
+		return new ModelAndView("/file/upload");
+	}
+
+	@RequestMapping("/doUpload")
+	public ModelAndView doUpload(MultipartFile file) {
 		try {
 			String DIR = "D:" + File.separatorChar + "SPRING";
 			File path = new File(DIR);
@@ -35,12 +40,13 @@ public class FileController {
 					+ file.getOriginalFilename()));
 		} catch (Exception e) {
 		}
-		return new ModelAndView("/file/upload");
+		return new ModelAndView("/file/uploadResult");
 	}
 
 	@RequestMapping("/download")
 	public ResponseEntity<byte[]> download(String fileName) throws Exception {
-		if (fileName == null) return null;
+		if (fileName == null)
+			return null;
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDispositionFormData("attachment", fileName);
@@ -54,6 +60,7 @@ public class FileController {
 	@RequestMapping("/showAllFiles")
 	public ModelAndView showAllFiles() {
 		File file = new File("D:" + File.separatorChar + "SPRING");
-		return new ModelAndView("/file/showAllFiles", "allFiles", file.listFiles());
+		return new ModelAndView("/file/showAllFiles", "allFiles",
+				file.listFiles());
 	}
 }
