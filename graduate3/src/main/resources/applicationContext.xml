@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/tx
@@ -9,10 +10,13 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-	<context:component-scan
-		base-package="graduation.core,graduation.cron,graduation.dao,graduation.service" />
+	<context:component-scan base-package="graduation" />
+	<mvc:resources mapping="/css/**" location="/WEB-INF/freemarker/css/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/freemarker/js/" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName">
 			<value>com.mysql.jdbc.Driver</value>
@@ -35,8 +39,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
-				<!-- <prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.format_sql">true</prop> -->
+				<!-- <prop key="hibernate.show_sql">true</prop> <prop key="hibernate.format_sql">true</prop> -->
 			</props>
 		</property>
 		<property name="packagesToScan">
@@ -45,6 +48,10 @@
 			</list>
 		</property>
 	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 	<bean id="jobTask"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
@@ -63,5 +70,27 @@
 			<value>0 */15 * * * ?</value>
 		</property>
 	</bean>
-
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="trigger" />
+			</list>
+		</property>
+	</bean>
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.163.com" />
+		<property name="username" value="x31001333@163.com" />
+		<property name="password" value="tkggycb" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.timeout">25000</prop>
+			</props>
+		</property>
+	</bean>
+	<bean class="graduation.core.JavaMailUtil">
+		<property name="sender">
+			<ref bean="javaMailSender" />
+		</property>
+	</bean>
 </beans>

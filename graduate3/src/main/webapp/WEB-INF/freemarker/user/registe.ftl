@@ -17,7 +17,7 @@
 				密码：<input class="form-input" type="password" id="password" name="password" />
 				手机/邮箱：<input class="form-input" type="text" name="email" />
 				验证码<input class="form-input" type="text" />
-				<input class="form-button" type="submit" value="注册" />
+				<input class="form-button" type="submit" value="注册" id="registe" />
 				<a href="login">点击登陆</a>
 			</div>
 		</form>

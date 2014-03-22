@@ -1,5 +1,6 @@
 package graduation.webspring;
 
+import graduation.core.JavaMailUtil;
 import graduation.domain.User;
 import graduation.service.UserService;
 
@@ -40,7 +41,8 @@ public class UserController {
 	@RequestMapping("/signUp")
 	public ModelAndView signUp(User user) {
 		userService.add(user);
-		return new ModelAndView("user/registe");
+		JavaMailUtil.send(user.getEmail());
+		return new ModelAndView("user/registeSuccess", "user", user);
 	}
 
 	@RequestMapping("/signIn")

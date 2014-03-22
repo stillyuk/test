@@ -14,17 +14,13 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-	<aop:aspectj-autoproxy />
-	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-	<context:component-scan
-		base-package="graduation.aop, graduation.webspring, graduation.interceptor" />
-	<mvc:resources mapping="/css/**" location="/WEB-INF/freemarker/css/" />
-	<mvc:resources mapping="/js/**" location="/WEB-INF/freemarker/js/" />
-
+	<context:component-scan base-package="graduation.webspring" />
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		<property name="order"><value>-1</value></property>
+		<property name="order">
+			<value>-1</value>
+		</property>
 		<property name="interceptors">
 			<list>
 				<bean parent="firstInterceptor" />
@@ -47,13 +43,5 @@
 			<value>text/html</value>
 		</property>
 	</bean>
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list>
-				<ref bean="trigger" />
-			</list>
-		</property>
-	</bean>
+
 </beans>

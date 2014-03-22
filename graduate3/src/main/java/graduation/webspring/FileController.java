@@ -24,7 +24,7 @@ public class FileController {
 	protected Log logger = LogFactory.getLog(getClass());
 
 	@RequestMapping("/upload")
-	public ModelAndView upload(MultipartFile file) {
+	public ModelAndView upload() {
 		return new ModelAndView("/file/upload");
 	}
 

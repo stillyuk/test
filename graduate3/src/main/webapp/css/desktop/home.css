@@ -3,10 +3,18 @@
 	float: right;
 }
 .navigation {
-	margin: 20px 40px;
+	float: left;
+	border: 1px solid #666;
+	margin: 0 200px;
+	padding: 10px 10px;
+	background-image: url("/img/head.png");
 }
 
 .navigation-menu {
 	float: left;
-	margin: 5px 10px;
+	clear: right;
+	margin: 0px 10px;	
+	background-image: url("/img/default-head.png");
+	font-size: 25px;
+	border-radius: 4px;
 }

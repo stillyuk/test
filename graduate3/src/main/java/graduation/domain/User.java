@@ -29,6 +29,12 @@ public class User {
 	@Column(name = "PASSWORD", length = 33)
 	private String password;
 
+	@Column(name = "USER_IMAGE", length = 50)
+	private String userImage;
+
+	@Column(name = "ACTIVATE" )
+	private boolean activate;
+
 	@ManyToMany
 	@JoinTable(name = "ROLE_USER", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	private List<Role> roles;
@@ -67,6 +73,22 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUserImage() {
+		return userImage;
+	}
+
+	public void setUserImage(String userImage) {
+		this.userImage = userImage;
+	}
+
+	public Boolean getActivate() {
+		return activate;
+	}
+
+	public void setActivate(Boolean activate) {
+		this.activate = activate;
 	}
 
 	public List<Role> getRoles() {
