@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2014-03-12
  */
 @Controller
+@SessionAttributes("username")
 @RequestMapping("news")
 public class NewsController {
 
@@ -29,15 +32,16 @@ public class NewsController {
 	public ModelAndView addNews() {
 		return new ModelAndView("news/addNews");
 	}
-	
+
 	@RequestMapping("doAddNews")
-	public ModelAndView doAddNews(News news) {
+	public ModelAndView doAddNews(News news, @ModelAttribute("username") String username) {
 		newsService.add(news);
 		return new ModelAndView("addResult", "title", news.getTitle());
 	}
 
 	@RequestMapping("allNews")
-	public ModelAndView allNews(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView allNews(HttpServletRequest request,
+			HttpServletResponse response) {
 		List<News> news = newsService.query(null);
 		try {
 			News2Htm.generate(news);

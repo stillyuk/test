@@ -16,18 +16,9 @@
 
 	<mvc:annotation-driven />
 	<context:component-scan base-package="graduation.webspring" />
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		<property name="order">
-			<value>-1</value>
-		</property>
-		<property name="interceptors">
-			<list>
-				<bean parent="firstInterceptor" />
-				<bean parent="webInterceptor" />
-			</list>
-		</property>
-	</bean>
+	<mvc:interceptors>
+		<bean class="graduation.interceptor.LoginInterceptor" />
+	</mvc:interceptors>
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">

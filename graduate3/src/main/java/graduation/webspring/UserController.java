@@ -54,7 +54,7 @@ public class UserController {
 		if (users.size() != 1) {
 			return new ModelAndView("user/login", "tip", "系统错误");
 		}
-		return new ModelAndView("redirect:/user/" + user.getUsername());
+		return new ModelAndView("redirect:/user/" + user.getUsername(), "username", user.getUsername());
 	}
 
 	@RequestMapping(value = "{username}")
