@@ -34,7 +34,7 @@ public class News {
 
 	@JoinColumn(name = "ADDER")
 	@ManyToOne
-	private User user;
+	private User adder;
 
 	public String getId() {
 		return id;
@@ -76,4 +76,11 @@ public class News {
 		this.newsDate = newsDate;
 	}
 
+	public User getAdder() {
+		return adder;
+	}
+
+	public void setAdder(User adder) {
+		this.adder = adder;
+	}
 }

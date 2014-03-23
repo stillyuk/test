@@ -6,9 +6,6 @@ import graduation.service.NewsService;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +25,14 @@ public class IndexController {
 	private NewsService newsService;
 
 	@RequestMapping({ "/", "/index" })
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView index() {
 		List<News> allNews = newsService.query(null);
 		News2Htm.generate(allNews);
 		return new ModelAndView("index", "allNews", allNews);
+	}
+
+	@RequestMapping("/button")
+	public ModelAndView button(String subject) {
+		return new ModelAndView("index");
 	}
 }

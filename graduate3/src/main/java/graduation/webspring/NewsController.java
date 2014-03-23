@@ -2,6 +2,7 @@ package graduation.webspring;
 
 import graduation.core.News2Htm;
 import graduation.domain.News;
+import graduation.domain.User;
 import graduation.service.NewsService;
 
 import java.util.List;
@@ -21,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2014-03-12
  */
 @Controller
+@RequestMapping("/news")
 @SessionAttributes("username")
-@RequestMapping("news")
 public class NewsController {
 
 	@Autowired
@@ -34,14 +35,16 @@ public class NewsController {
 	}
 
 	@RequestMapping("doAddNews")
-	public ModelAndView doAddNews(News news, @ModelAttribute("username") String username) {
+	public ModelAndView doAddNews(News news, @ModelAttribute("userID") String userID) {
+		User user = new User();
+		user.setUuid(userID);
+		news.setAdder(user);
 		newsService.add(news);
 		return new ModelAndView("addResult", "title", news.getTitle());
 	}
 
 	@RequestMapping("allNews")
-	public ModelAndView allNews(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView allNews(HttpServletRequest request, HttpServletResponse response) {
 		List<News> news = newsService.query(null);
 		try {
 			News2Htm.generate(news);

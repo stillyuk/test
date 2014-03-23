@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2014-03-12 12:57
  */
 @Controller
-@RequestMapping("/user/")
+@RequestMapping("/user")
 public class UserController {
 	protected final Log logger = LogFactory.getLog(getClass());
 
@@ -54,7 +54,7 @@ public class UserController {
 		if (users.size() != 1) {
 			return new ModelAndView("user/login", "tip", "系统错误");
 		}
-		return new ModelAndView("redirect:/user/" + user.getUsername(), "username", user.getUsername());
+		return new ModelAndView("redirect:/user/" + user.getUsername(), "userID", users.get(0).getUuid());
 	}
 
 	@RequestMapping(value = "{username}")
