@@ -20,6 +20,10 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
 			<mvc:exclude-mapping path="/user/login.*" />
+			<mvc:exclude-mapping path="/user/registe.*" />
+			<mvc:exclude-mapping path="/user/signUp.*" />
+			<mvc:exclude-mapping path="/user/signIn.*" />
+			<mvc:exclude-mapping path="/user/checkUsername.*" />
 			<bean class="graduation.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
