@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hibtest1.entity.Test" table="TEST">
+		<id name="tid" type="string">
+			<column name="TID" length="36" />
+			<generator class="uuid" />
+		</id>
+		<property name="tcontent" type="java.lang.String">
+			<column name="TCONTENT" length="2000" not-null="false" />
+		</property>
+		<property name="tstate" type="java.lang.String">
+			<column name="TSTATE" length="2000" not-null="false" />
+		</property>
+		<set name="bks" lazy="false">
+			<key column="TID" />
+			<one-to-many class="com.hibtest1.entity.Question" />
+		</set>
+	</class>
+</hibernate-mapping>

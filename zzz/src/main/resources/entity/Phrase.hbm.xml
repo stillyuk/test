@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hibtest1.entity.Phrase" table="PHRASE">
+		<id name="pid" type="string">
+			<column name="PID" length="36" />
+			<generator class="uuid" />
+		</id>
+		<property name="pcontent" type="java.lang.String">
+			<column name="PCONTENT" length="250" not-null="false" />
+		</property>
+		<property name="pword" type="java.lang.String">
+			<column name="PWORD" length="250" not-null="false" />
+		</property>
+		<property name="psound" type="java.lang.String">
+			<column name="PSOUND" length="250" not-null="false" />
+		</property>
+		<property name="pstate" type="java.lang.String">
+			<column name="PSTATE" length="50" not-null="false" />
+		</property>
+		<property name="pmean" type="java.lang.String">
+			<column name="PMEAN" length="250" not-null="false" />
+		</property>
+		<property name="panswer" type="java.lang.String">
+			<column name="PANSWER" length="250" not-null="false" />
+		</property>
+	</class>
+</hibernate-mapping>

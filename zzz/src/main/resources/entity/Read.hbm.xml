@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hibtest1.entity.Read" table="READ_">
+		<id name="rid" type="string">
+			<column name="RID" length="36" />
+			<generator class="uuid" />
+		</id>
+		<property name="rcontent" type="java.lang.String">
+			<column name="RCONTENT" length="4000" not-null="false" />
+		</property>
+		<property name="rtitle" type="java.lang.String">
+			<column name="RTITLE" length="200" not-null="false" />
+		</property>
+		<property name="poetry" type="java.lang.String">
+			<column name="POETRY" length="1" not-null="false" />
+		</property>
+		<property name="beautiful" type="java.lang.String">
+			<column name="BEAUTIFUL" length="1" not-null="false" />
+		</property>
+		<property name="story" type="java.lang.String">
+			<column name="STORY" length="1" not-null="false" />
+		</property>
+		<property name="joke" type="java.lang.String">
+			<column name="JOKE" length="1" not-null="false" />
+		</property>
+		<property name="amusement" type="java.lang.String">
+			<column name="AMUSEMENT" length="1" not-null="false" />
+		</property>
+		<property name="science" type="java.lang.String">
+			<column name="SCIENCE" length="1" not-null="false" />
+		</property>
+	</class>
+</hibernate-mapping>

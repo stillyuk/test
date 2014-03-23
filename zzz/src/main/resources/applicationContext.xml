@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/english" />
+		<property name="username" value="root" />
+		<property name="password" value="vvvv" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="schemaUpdate">
+			<value>true</value>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>entity/Users.hbm.xml</value>
+				<value>entity/Question.hbm.xml</value>
+				<value>entity/Test.hbm.xml</value>
+				<value>entity/Phrase.hbm.xml</value>
+				<value>entity/Read.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<bean id="umAction" class="com.ssh2test1.action.UserManagerAction">
+		<property name="userBiz" ref="userBiz" />
+	</bean>
+	<bean id="user" class="com.ssh2test1.action.UserManagerAction">
+		<property name="userBiz" ref="userBiz" />
+	</bean>
+	<bean id="state" class="com.ssh2test1.action.TestManageAction">
+		<property name="testBiz">
+			<ref bean="testBiz" />
+		</property>
+	</bean>
+	<bean id="statePhrase" class="com.ssh2test1.action.PhraseManageAction">
+		<property name="phraseBiz">
+			<ref bean="phraseBiz" />
+		</property>
+	</bean>
+	<bean id="read" class="com.ssh2test1.action.ReadManageAction">
+		<property name="readBiz">
+			<ref bean="readBiz" />
+		</property>
+	</bean>
+	<bean id="listPhrase" class="com.ssh2test1.action.ListPhraseAction">
+		<property name="phraseBiz">
+			<ref bean="phraseBiz" />
+		</property>
+	</bean>
+	<bean id="userDAO" class="com.ssh2test1.dao.UserDAOImp1">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="testDAO" class="com.ssh2test1.dao.TestDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="phraseDAO" class="com.ssh2test1.dao.PhraseDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="readDAO" class="com.ssh2test1.dao.ReadDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userBiz" class="com.ssh2test1.biz.UserBizImp1">
+		<property name="userDAO" ref="userDAO" />
+	</bean>
+	<bean id="testBiz" class="com.ssh2test1.biz.TestBizImpl">
+		<property name="testDAO" ref="testDAO" />
+	</bean>
+	<bean id="phraseBiz" class="com.ssh2test1.biz.PhraseBizImpl">
+		<property name="phraseDAO" ref="phraseDAO" />
+	</bean>
+	<bean id="readBiz" class="com.ssh2test1.biz.ReadBizImpl">
+		<property name="readDAO" ref="readDAO" />
+	</bean>
+</beans>
