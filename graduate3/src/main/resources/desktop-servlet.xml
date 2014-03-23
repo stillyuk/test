@@ -17,7 +17,11 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="graduation.webspring" />
 	<mvc:interceptors>
-		<bean class="graduation.interceptor.LoginInterceptor" />
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" />
+			<mvc:exclude-mapping path="/user/login.*" />
+			<bean class="graduation.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
