@@ -29,10 +29,10 @@ public class ContextFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+			ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		logger.warn( httpRequest.getServletPath());
+		logger.warn(httpRequest.getServletPath());
 		ThreadLocal<HttpSession> session = new ThreadLocal<HttpSession>();
 		session.set(httpRequest.getSession());
 		Context.session = session;

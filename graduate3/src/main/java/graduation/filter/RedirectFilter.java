@@ -27,12 +27,12 @@ public class RedirectFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+			ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String staticResource = httpRequest.getServletPath();
-		if (staticResource.matches(".*\\.\\w{2,4}")) {
+		if (staticResource.matches(".*\\.(css|js|png)")) {
 			chain.doFilter(request, response);
 			return;
 		}

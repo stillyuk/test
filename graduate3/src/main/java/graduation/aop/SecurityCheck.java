@@ -22,7 +22,7 @@ public class SecurityCheck {
 	/**
 	 * @since 2014-03-18 16:59
 	 */
-//	@Before("execution(* graduation.web.*.userHome(..))")
+	// @Before("execution(* graduation.web.*.userHome(..))")
 	public void start() {
 		HttpSession session = Context.session.get();
 		if (session != null) {

@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name = "ROLE")
+@Entity(name = "GRA_ROLE")
 public class Role {
 	@Id
 	@GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
@@ -24,7 +24,7 @@ public class Role {
 	private String roleName;
 
 	@ManyToMany
-	@JoinTable(name = "ROLE_USER", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
+	@JoinTable(name = "GRA_ROLE_USER", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
 	private List<User> users;
 
 	public String getUuid() {

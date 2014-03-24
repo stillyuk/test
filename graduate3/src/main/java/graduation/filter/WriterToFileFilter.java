@@ -27,8 +27,8 @@ public class WriterToFileFilter implements Filter {
 
 	private ServletContext servletContext;
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+			ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
@@ -48,8 +48,7 @@ public class WriterToFileFilter implements Filter {
 		File absoluteDir = new File(rootPath + dir);
 		if (!absoluteDir.exists())
 			absoluteDir.mkdir();
-		final PrintWriter writer = new PrintWriter(rootPath + dir
-				+ File.separatorChar + fileName + ".htm");
+		final PrintWriter writer = new PrintWriter(rootPath + dir + File.separatorChar + fileName + ".htm");
 		HttpServletResponse rep = new HttpServletResponseWrapper(res) {
 			public PrintWriter getWriter() {
 				return writer;
@@ -59,9 +58,7 @@ public class WriterToFileFilter implements Filter {
 		if (log.isInfoEnabled()) {
 			log.info("输出: " + dir + File.separatorChar + fileName + ".htm");
 		}
-		response.getWriter().write(
-				"<h1>主页静态化完成</h1>" + "内容已输出到服务器目录" + rootPath + dir + fileName
-						+ ".htm中");
+		response.getWriter().write("<h1>主页静态化完成</h1>" + "内容已输出到服务器目录" + rootPath + dir + fileName + ".htm中");
 		writer.flush();
 		writer.close();
 	}

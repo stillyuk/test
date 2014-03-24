@@ -19,7 +19,7 @@
 	<div>
 		<#if allFiles ??>
 			<#list allFiles as file>
-				<a href="download?fileName=${file.name}">${file.name}</a>
+				<a href="../file/download?fileName=${file.name}">${file.name}</a>
 			</#list>
 		</#if>
 	</div>

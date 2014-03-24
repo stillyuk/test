@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 public class JavaMailUtil {
 	private static Log logger = LogFactory.getLog(JavaMailUtil.class);
 
-	private static JavaMailSender sender; 
+	private static JavaMailSender sender;
 
 	public JavaMailSender getSender() {
 		return sender;

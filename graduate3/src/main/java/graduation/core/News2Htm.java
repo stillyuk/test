@@ -28,12 +28,9 @@ public class News2Htm {
 			return;
 		}
 		for (int i = 0; i < news.size(); i++) {
-			String dir = new SimpleDateFormat("yyyy-MM-dd").format(news.get(i)
-					.getNewsDate());
-			String urlPath = context.getSchema() + "://"
-					+ context.getServerName() + ":" + context.getServerPort()
-					+ context.getContextPath() + "/news/singleNews.news?id="
-					+ news.get(i).getId() + "&dir=" + dir;
+			String dir = new SimpleDateFormat("yyyy-MM-dd").format(news.get(i).getNewsDate());
+			String urlPath = context.getSchema() + "://" + context.getServerName() + ":" + context.getServerPort()
+					+ context.getContextPath() + "/news/singleNews.news?id=" + news.get(i).getId() + "&dir=" + dir;
 			URL url;
 			try {
 				url = new URL(urlPath);
@@ -52,10 +49,8 @@ public class News2Htm {
 
 	private static boolean preCheck() {
 		context = ContextProvider.getContext();
-		if (context == null || context.getSchema() == null
-				|| context.getServerName() == null
-				|| context.getServerPort() == 0
-				|| context.getContextPath() == null) {
+		if (context == null || context.getSchema() == null || context.getServerName() == null
+				|| context.getServerPort() == 0 || context.getContextPath() == null) {
 			return false;
 		}
 		return true;

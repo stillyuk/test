@@ -1,5 +1,7 @@
 package graduation.webspring;
 
+import graduation.core.FileUtil;
+
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
@@ -31,13 +33,12 @@ public class FileController {
 	@RequestMapping("/doUpload")
 	public ModelAndView doUpload(MultipartFile file) {
 		try {
-			String DIR = "D:" + File.separatorChar + "SPRING";
+			String DIR = FileUtil.FILE_UPLOAD_PATH;
 			File path = new File(DIR);
 			if (!path.exists()) {
 				path.mkdir();
 			}
-			file.transferTo(new File(DIR + File.separatorChar
-					+ file.getOriginalFilename()));
+			file.transferTo(new File(DIR + File.separatorChar + file.getOriginalFilename()));
 		} catch (Exception e) {
 		}
 		return new ModelAndView("/file/uploadResult");
@@ -50,17 +51,14 @@ public class FileController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDispositionFormData("attachment", fileName);
-		String filePath = "D:" + File.separatorChar + "SPRING"
-				+ File.separatorChar + fileName;
-		return new ResponseEntity<byte[]>(
-				FileUtils.readFileToByteArray(new File(filePath)), headers,
+		String filePath = FileUtil.FILE_DOWNLOAD_PATH + File.separatorChar + fileName;
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(new File(filePath)), headers,
 				HttpStatus.CREATED);
 	}
 
 	@RequestMapping("/showAllFiles")
 	public ModelAndView showAllFiles() {
-		File file = new File("D:" + File.separatorChar + "SPRING");
-		return new ModelAndView("/file/showAllFiles", "allFiles",
-				file.listFiles());
+		File file = new File(FileUtil.FILE_DOWNLOAD_PATH);
+		return new ModelAndView("/file/showAllFiles", "allFiles", file.listFiles());
 	}
 }

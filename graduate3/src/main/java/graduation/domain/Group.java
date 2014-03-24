@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name = "GROUPS")
+@Entity(name = "GRA_GROUPS")
 public class Group {
 	@Id
 	@GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
@@ -29,7 +29,7 @@ public class Group {
 	private User manager;
 
 	@ManyToMany
-	@JoinTable(name = "GROUP_USER", joinColumns = { @JoinColumn(name = "GROUP_ID") }, inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
+	@JoinTable(name = "GRA_GROUP_USER", joinColumns = { @JoinColumn(name = "GROUP_ID") }, inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
 	private List<User> users;
 
 	public String getUuid() {
