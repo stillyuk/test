@@ -5,11 +5,11 @@ import graduation.domain.User;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,40 +17,44 @@ import org.springframework.stereotype.Repository;
  * @since 2014-03-12 13:03
  */
 @Repository
-public class UserDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+public class UserDao extends HibernateDaoSupport {
 
-	@SuppressWarnings("unchecked")
-	public List<User> query(User user) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Criteria criteria = session.createCriteria(User.class);
-		criteria.add(Restrictions.eq("username", user.getUsername())).add(
-				Restrictions.eq("password", user.getPassword()));
-		List<User> users = criteria.list();
-		tx.commit();
-		session.close();
-		return users;
+	public List<User> query(final User user) {
+		HibernateCallback<List<User>> action = new HibernateCallback<List<User>>() {
+			@Override
+			public List<User> doInHibernate(Session session) throws HibernateException {
+				Criteria criteria = session.createCriteria(User.class);
+				criteria.add(Restrictions.eq("username", user.getUsername())).add(
+						Restrictions.eq("password", user.getPassword()));
+				@SuppressWarnings("unchecked")
+				List<User> users = criteria.list();
+				return users;
+			}
+		};
+		return getHibernateTemplate().execute(action);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> queryByUsername(User user) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Criteria criteria = session.createCriteria(User.class);
-		criteria.add(Restrictions.eq("username", user.getUsername()));
-		List<User> users = criteria.list();
-		tx.commit();
-		session.close();
-		return users;
+	public List<User> queryByUsername(final User user) {
+		HibernateCallback<List<User>> action = new HibernateCallback<List<User>>() {
+			@Override
+			public List<User> doInHibernate(Session session) throws HibernateException {
+				Criteria criteria = session.createCriteria(User.class);
+				criteria.add(Restrictions.eq("username", user.getUsername()));
+				List<User> users = criteria.list();
+				return users;
+			}
+		};
+		return getHibernateTemplate().execute(action);
 	}
 
-	public void add(User user) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.save(user);
-		tx.commit();
-		session.close();
+	public void add(final User user) {
+		HibernateCallback<Object> action = new HibernateCallback<Object>() {
+			@Override
+			public Object doInHibernate(Session session) throws HibernateException {
+				return session.save(user);
+			}
+		};
+		getHibernateTemplate().execute(action);
 	}
 }

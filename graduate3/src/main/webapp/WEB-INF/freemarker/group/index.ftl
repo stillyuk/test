@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>用户注册</title>
-<link rel="stylesheet" type="text/css" href="../css/group.css" />
-<script type="text/javascript" src="../js/jquery.js"></script>
-<script type="text/javascript" src="../js/registe.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/desktop/group.css" />
+<script type="text/javascript" src="/js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="/js/desktop/registe.js"></script>
 </head>
 <body>
 	<div class="center-form">
@@ -15,7 +15,6 @@
 			<div class="form-body">
 				组名：<span id="tip"></span><input class="form-input" type="text" id="groupName" name="groupName" />
 				<input class="form-button" type="submit" value="添加" />
-				
 			</div>
 		</form>
 	</div>

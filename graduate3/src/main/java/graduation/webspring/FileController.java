@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/file")
+@SessionAttributes("username")
 public class FileController {
 	protected Log logger = LogFactory.getLog(getClass());
 
@@ -31,9 +34,9 @@ public class FileController {
 	}
 
 	@RequestMapping("/doUpload")
-	public ModelAndView doUpload(MultipartFile file) {
+	public ModelAndView doUpload(@ModelAttribute("username") String username, MultipartFile file) {
 		try {
-			String DIR = FileUtil.FILE_UPLOAD_PATH;
+			String DIR = FileUtil.FILE_DOWNLOAD_PATH + File.separatorChar + username;
 			File path = new File(DIR);
 			if (!path.exists()) {
 				path.mkdir();
@@ -57,8 +60,8 @@ public class FileController {
 	}
 
 	@RequestMapping("/showAllFiles")
-	public ModelAndView showAllFiles() {
-		File file = new File(FileUtil.FILE_DOWNLOAD_PATH);
-		return new ModelAndView("/file/showAllFiles", "allFiles", file.listFiles());
+	public ModelAndView showAllFiles(@ModelAttribute("username") String username) {
+		File file = new File(FileUtil.FILE_DOWNLOAD_PATH + File.separatorChar + username);
+		return new ModelAndView("/file/showAllFiles", "allFiles", file.exists() ? file.listFiles() : null);
 	}
 }

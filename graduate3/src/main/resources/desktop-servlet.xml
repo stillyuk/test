@@ -26,7 +26,10 @@
 			<mvc:exclude-mapping path="/user/checkUsername.*" />
 			<bean class="graduation.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
-		<bean class="graduation.interceptor.SessionInterceptor" />
+		<mvc:interceptor>
+			<mvc:mapping path="/user/signIn.*" />
+			<bean class="graduation.interceptor.SessionInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">

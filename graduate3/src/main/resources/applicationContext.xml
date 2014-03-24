@@ -44,9 +44,9 @@
 		<property name="jobDetail" ref="jobTask" />
 		<property name="cronExpression" value="0 */20 * * * ?" />
 	</bean>
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	<!-- <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers" ref="trigger" />
-	</bean>
+	</bean> -->
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.163.com" />
 		<property name="username" value="x31001333@163.com" />

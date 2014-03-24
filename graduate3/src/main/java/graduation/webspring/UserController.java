@@ -1,5 +1,6 @@
 package graduation.webspring;
 
+import graduation.core.FileUtil;
 import graduation.core.JavaMailUtil;
 import graduation.domain.User;
 import graduation.service.UserService;
@@ -41,6 +42,7 @@ public class UserController {
 	@RequestMapping("/signUp")
 	public ModelAndView signUp(User user) {
 		userService.add(user);
+		FileUtil.mkUserDir(user.getUsername());
 		JavaMailUtil.send(user.getEmail());
 		return new ModelAndView("user/registeSuccess", "user", user);
 	}
@@ -54,13 +56,12 @@ public class UserController {
 		if (users.size() != 1) {
 			return new ModelAndView("user/login", "tip", "系统错误");
 		}
-		return new ModelAndView("redirect:/user/" + user.getUsername(), "userID", users.get(0).getUuid());
+		return new ModelAndView("redirect:/user/" + user.getUsername(), "user", users.get(0));
 	}
 
 	@RequestMapping(value = "{username}")
-	@ResponseBody
 	public ModelAndView userHome(@PathVariable String username) {
-		File file = new File("D:" + File.separatorChar + "SPRING");
+		File file = new File(FileUtil.FILE_DOWNLOAD_PATH + File.separatorChar + username);
 		return new ModelAndView("user/home", "allFiles", file.listFiles());
 	}
 
