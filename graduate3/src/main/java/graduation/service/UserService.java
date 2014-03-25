@@ -22,10 +22,14 @@ public class UserService {
 	}
 
 	public List<User> queryByUsername(User user) {
-		return userDao.queryByUsername(user);
+		return userDao.queryByname(user);
 	}
 
-	public void add(User user) {
-		userDao.add(user);
+	public User queryById(String id) {
+		return userDao.queryById(id);
+	}
+
+	public Object add(User user) {
+		return userDao.add(user);
 	}
 }

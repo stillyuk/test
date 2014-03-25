@@ -24,7 +24,6 @@ public class News2Htm {
 
 	public static void generate(List<News> news) {
 		if (!preCheck()) {
-			logger.info("a");
 			return;
 		}
 		for (int i = 0; i < news.size(); i++) {

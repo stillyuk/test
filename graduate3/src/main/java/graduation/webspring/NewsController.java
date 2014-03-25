@@ -4,6 +4,7 @@ import graduation.core.News2Htm;
 import graduation.domain.News;
 import graduation.domain.User;
 import graduation.service.NewsService;
+import graduation.service.UserService;
 
 import java.util.List;
 
@@ -23,27 +24,28 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/news")
-@SessionAttributes("username")
+@SessionAttributes("userId")
 public class NewsController {
 
 	@Autowired
 	NewsService newsService;
+	@Autowired
+	UserService userService;
 
-	@RequestMapping("addNews")
+	@RequestMapping("/addNews")
 	public ModelAndView addNews() {
 		return new ModelAndView("news/addNews");
 	}
 
-	@RequestMapping("doAddNews")
-	public ModelAndView doAddNews(News news, @ModelAttribute("userID") String userID) {
-		User user = new User();
-		user.setUuid(userID);
+	@RequestMapping("/doAddNews")
+	public ModelAndView doAddNews(News news, @ModelAttribute("userId") String userId) {
+		User user = userService.queryById(userId);
 		news.setAdder(user);
 		newsService.add(news);
 		return new ModelAndView("addResult", "title", news.getTitle());
 	}
 
-	@RequestMapping("allNews")
+	@RequestMapping("/allNews")
 	public ModelAndView allNews(HttpServletRequest request, HttpServletResponse response) {
 		List<News> news = newsService.query(null);
 		try {
@@ -53,7 +55,7 @@ public class NewsController {
 		return new ModelAndView("news/allNews", "allNews", news);
 	}
 
-	@RequestMapping("singleNews")
+	@RequestMapping("/singleNews")
 	public ModelAndView singleNews(String id) {
 		List<News> news = newsService.query(id);
 		if (news != null && news.size() > 0) {

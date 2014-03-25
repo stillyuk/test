@@ -14,12 +14,12 @@
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<context:component-scan base-package="graduation" />
-	<mvc:resources mapping="/css/**" location="/WEB-INF/freemarker/css/" />
-	<mvc:resources mapping="/js/**" location="/WEB-INF/freemarker/js/" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@//localhost:1521/ratansoft" />
+		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /> <property name="url" value="jdbc:oracle:thin:@//localhost:1521/ratansoft" 
+			/> -->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/graduation" />
 		<property name="username" value="root" />
 		<property name="password" value="vvvv" />
 	</bean>
@@ -28,12 +28,21 @@
 		<property name="hibernateProperties">
 			<props>
 				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
-				<!-- <prop key="hibernate.show_sql">true</prop> <prop key="hibernate.format_sql">true</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
 		<property name="packagesToScan" value="graduation.domain" />
 	</bean>
-
+	<bean id="userDao" class="graduation.dao.UserDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="newsDao" class="graduation.dao.NewsDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="groupDao" class="graduation.dao.GroupDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<bean id="jobTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -44,9 +53,8 @@
 		<property name="jobDetail" ref="jobTask" />
 		<property name="cronExpression" value="0 */20 * * * ?" />
 	</bean>
-	<!-- <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers" ref="trigger" />
-	</bean> -->
+	<!-- <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> <property name="triggers" ref="trigger" /> 
+		</bean> -->
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.163.com" />
 		<property name="username" value="x31001333@163.com" />

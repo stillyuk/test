@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/group")
-@SessionAttributes("username")
+@SessionAttributes("userId")
 public class GroupController {
 	@Autowired
 	private GroupService groupService;

@@ -13,7 +13,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		User user = (User) modelAndView.getModel().get("user");
 		if (user.getUuid() != null && user.getUsername() != null) {
-			request.getSession().setAttribute("userID", user.getUuid());
+			request.getSession().setAttribute("userId", user.getUuid());
 			request.getSession().setAttribute("username", user.getUsername());
 			modelAndView.getModel().remove("user");
 		}

@@ -41,9 +41,9 @@ public class UserController {
 
 	@RequestMapping("/signUp")
 	public ModelAndView signUp(User user) {
-		userService.add(user);
 		FileUtil.mkUserDir(user.getUsername());
 		JavaMailUtil.send(user.getEmail());
+		userService.add(user);
 		return new ModelAndView("user/registeSuccess", "user", user);
 	}
 
@@ -65,8 +65,8 @@ public class UserController {
 		return new ModelAndView("user/home", "allFiles", file.listFiles());
 	}
 
-	@RequestMapping(value = "/checkUsername", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
+	@RequestMapping(value = "/checkUsername", produces = "text/plain;charset=UTF-8")
 	public String checkUsername(User user) {
 		List<User> users = userService.queryByUsername(user);
 		if (users == null || users.size() == 0) {
