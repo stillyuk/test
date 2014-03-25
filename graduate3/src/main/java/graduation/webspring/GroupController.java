@@ -1,7 +1,11 @@
 package graduation.webspring;
 
 import graduation.domain.Group;
+import graduation.domain.User;
 import graduation.service.GroupService;
+import graduation.service.UserService;
+
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +26,9 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping({ "", "/", "index" })
 	public String index(Group group) {
 		return "group/index";
@@ -29,16 +36,19 @@ public class GroupController {
 
 	@RequestMapping("/addGroup")
 	public String addGroup() {
-		return "roup/addGroup";
+		return "group/addGroup";
 	}
 
 	@RequestMapping("/doAddGroup")
-	public String doAddGroup(Group group, @ModelAttribute("userId") String userId) {
-		if (group == null)
-			return null;
-//		group.setManager();
+	public ModelAndView doAddGroup(Group group, @ModelAttribute("userId") String userId) {
+		if (group == null) {
+			return new ModelAndView("group/addResult", "tip", "内容为空");
+		}
+		User user = userService.queryById(userId);
+		group.setManager(user);
+		group.setUsers(Arrays.asList(new User[] { user }));
 		groupService.add(group);
-		return "redirect:index";
+		return new ModelAndView("group/addResult", "tip", "添加成功");
 	}
 
 	@RequestMapping("/showAllGroup")

@@ -2,7 +2,6 @@ package graduation.webspring;
 
 import graduation.core.News2Htm;
 import graduation.domain.News;
-import graduation.domain.User;
 import graduation.service.NewsService;
 import graduation.service.UserService;
 
@@ -39,8 +38,7 @@ public class NewsController {
 
 	@RequestMapping("/doAddNews")
 	public ModelAndView doAddNews(News news, @ModelAttribute("userId") String userId) {
-		User user = userService.queryById(userId);
-		news.setAdder(user);
+		news.setAdder(userService.queryById(userId));
 		newsService.add(news);
 		return new ModelAndView("addResult", "title", news.getTitle());
 	}
