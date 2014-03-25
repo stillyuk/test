@@ -7,12 +7,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author jiangyukun
  * @since 2014-03-12 13:00
  */
 @Service
+@Transactional
 public class UserService {
 	@Autowired
 	private UserDao userDao;
