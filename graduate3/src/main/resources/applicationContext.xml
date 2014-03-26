@@ -59,7 +59,7 @@
 		<property name="cronExpression" value="0 */20 * * * ?" />
 	</bean>
 	<!-- <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers" ref="trigger" /> 
+		<property name="triggers" ref="trigger" />
 	</bean> -->
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.163.com" />

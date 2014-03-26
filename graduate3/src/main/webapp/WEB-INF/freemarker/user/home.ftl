@@ -11,9 +11,10 @@
 	</div>
 		<div style="clear:both"></div>
 	<div class="navigation">
-		<div class="navigation-menu"><a href="../file/upload">上传文件</a></div>
-		<div class="navigation-menu"><a href="../file/showAllFiles">下载文件</a></div>
-		<div class="navigation-menu"><a href="../group/addGroup">新建组</a></div>
+		<div class="navigation-menu"><a href="/file/upload">上传文件</a></div>
+		<div class="navigation-menu"><a href="/file/showAllFiles">下载文件</a></div>
+		<div class="navigation-menu"><a href="/group/addGroup">新建组</a></div>
+		<div class="navigation-menu"><a href="/group/manageGroup">管理组</a></div>
 	</div>
 	<div style="clear:both"></div>
 	<div>

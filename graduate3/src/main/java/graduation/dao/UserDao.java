@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
  * @author jiangyukun
  * @since 2014-03-12 13:03
  */
+@SuppressWarnings("unchecked")
 public class UserDao extends HibernateDaoSupport {
 
 	public Object add(final User user) {
@@ -24,7 +25,6 @@ public class UserDao extends HibernateDaoSupport {
 	public List<User> query(final User user) {
 		HibernateCallback<List<User>> action = new HibernateCallback<List<User>>() {
 			@Override
-			@SuppressWarnings("unchecked")
 			public List<User> doInHibernate(Session session) throws HibernateException {
 				Criteria criteria = session.createCriteria(User.class);
 				criteria.add(Restrictions.eq("username", user.getUsername())).add(
@@ -43,7 +43,6 @@ public class UserDao extends HibernateDaoSupport {
 	public List<User> queryByname(final User user) {
 		HibernateCallback<List<User>> action = new HibernateCallback<List<User>>() {
 			@Override
-			@SuppressWarnings("unchecked")
 			public List<User> doInHibernate(Session session) throws HibernateException {
 				Criteria criteria = session.createCriteria(User.class);
 				criteria.add(Restrictions.eq("username", user.getUsername()));

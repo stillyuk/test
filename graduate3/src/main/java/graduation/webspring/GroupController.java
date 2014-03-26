@@ -6,6 +6,7 @@ import graduation.service.GroupService;
 import graduation.service.UserService;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,13 +52,20 @@ public class GroupController {
 		return new ModelAndView("group/addResult", "tip", "添加成功");
 	}
 
+	@RequestMapping("/manageGroup")
+	public ModelAndView manageGroup(@ModelAttribute("userId") String userId) {
+		List<Group> groups = groupService.queryByUser(userService.queryById(userId));
+		return new ModelAndView("group/manageGroup", "allGroup", groups);
+	}
+
 	@RequestMapping("/showAllGroup")
 	public void showAllGroup(Group group) {
 		groupService.query(group);
 	}
 
-	@RequestMapping("{groupId}")
-	public ModelAndView showGroupById(@PathVariable String groupId) {
-		return new ModelAndView("group/home", "groupId", groupId);
+	@RequestMapping("{groupName}")
+	public ModelAndView showGroupById(@PathVariable String groupName) {
+		Group group = groupService.queryByGroupName(groupName);
+		return new ModelAndView("group/home", "group", group);
 	}
 }

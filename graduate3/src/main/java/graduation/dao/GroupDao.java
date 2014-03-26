@@ -1,6 +1,7 @@
 package graduation.dao;
 
 import graduation.domain.Group;
+import graduation.domain.User;
 
 import java.util.List;
 
@@ -15,27 +16,48 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
  * @author jiangyukun
  * @since 2014-03-19
  */
+@SuppressWarnings("unchecked")
 public class GroupDao extends HibernateDaoSupport {
-	public List<Group> query(final Group group) {
-		HibernateCallback<List<Group>> action = new HibernateCallback<List<Group>>() {
+
+	public Object add(final Group group) {
+		return getHibernateTemplate().execute(new HibernateCallback<Object>() {
 			@Override
-			@SuppressWarnings("unchecked")
+			public Object doInHibernate(Session session) throws HibernateException {
+				return (Object) session.save(group);
+			}
+		});
+	}
+
+	public List<Group> query(final Group group) {
+		return getHibernateTemplate().execute(new HibernateCallback<List<Group>>() {
+			@Override
 			public List<Group> doInHibernate(Session session) throws HibernateException {
 				Criteria criteria = session.createCriteria(Group.class);
 				criteria.add(Restrictions.eq("username", group.getUuid()));
 				return criteria.list();
 			}
-		};
-		return getHibernateTemplate().execute(action);
+		});
 	}
 
-	public Object add(final Group group) {
-		HibernateCallback<Object> action = new HibernateCallback<Object>() {
+	public List<Group> queryByUser(final User user) {
+		return getHibernateTemplate().execute(new HibernateCallback<List<Group>>() {
 			@Override
-			public Object doInHibernate(Session session) throws HibernateException {
-				return (Object) session.save(group);
+			public List<Group> doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(Group.class);
+				c.add(Restrictions.eq("manager", user));
+				return c.list();
 			}
-		};
-		return getHibernateTemplate().execute(action);
+		});
+	}
+
+	public List<Group> queryByGroupName(final String groupName) {
+		return getHibernateTemplate().execute(new HibernateCallback<List<Group>>() {
+			@Override
+			public List<Group> doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(Group.class);
+				c.add(Restrictions.eq("groupName", groupName));
+				return c.list();
+			}
+		});
 	}
 }
