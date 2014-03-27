@@ -8,8 +8,9 @@
 <script type="text/javascript" src="/js/registe.js"></script>
 </head>
 <body>
-	组信息
-	组名：${group.groupNmae}
-	拥有者：${group.manager}
+	<div>组信息
+		<div>组名：${group.groupName}</div>
+		<div>管理者：${group.manager.username}</div>
+	</div>
 </body>
 </html>

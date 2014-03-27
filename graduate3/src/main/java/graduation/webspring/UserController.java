@@ -2,6 +2,7 @@ package graduation.webspring;
 
 import graduation.core.FileUtil;
 import graduation.core.JavaMailUtil;
+import graduation.core.JsonMessage;
 import graduation.domain.User;
 import graduation.service.UserService;
 
@@ -24,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	protected final Log logger = LogFactory.getLog(getClass());
+	protected final Log logger = LogFactory.getLog(UserController.class);
 
 	@Autowired
 	private UserService userService;
@@ -65,13 +66,26 @@ public class UserController {
 		return new ModelAndView("user/home", "allFiles", file.listFiles());
 	}
 
+	@RequestMapping(value = "/checkUsername", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	@RequestMapping(value = "/checkUsername", produces = "text/plain;charset=UTF-8")
-	public String checkUsername(User user) {
+	public JsonMessage checkUsername(User user) {
 		List<User> users = userService.queryByUsername(user);
 		if (users == null || users.size() == 0) {
-			return "";
+			return new JsonMessage();
 		}
-		return "此用户已被注册";
+		return new JsonMessage("此用户已被注册");
+	}
+
+	@RequestMapping(value = "/userInfo")
+	@ResponseBody
+	public ModelAndView userInfo(User user) {
+		List<User> users = userService.queryByUsername(user);
+		if (users == null || users.size() == 0) {
+			return null;
+		}
+		user = users.get(0);
+		user.setGroups(null);
+		user.setRoles(null);
+		return new ModelAndView().addObject("user", user);
 	}
 }

@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>无标题页</title>
+<script type="text/javascript" src="/js/jquery-2.1.0.js"></script>
 <script>
-	
-</script>
+	$(function() {
+		$.ajax({
+			url : "/json/test.json",
+			data : {
 
+			},
+			success : function(data) {
+				alert(data.a);
+			},
+			dataType : "json"
+		});
+	});
+</script>
 </head>
 <body>
 	<form action="button" method="get">

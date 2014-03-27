@@ -55,8 +55,7 @@ public class FileController {
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDispositionFormData("attachment", fileName);
 		String filePath = FileUtil.FILE_DOWNLOAD_PATH + File.separatorChar + fileName;
-		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(new File(filePath)), headers,
-				HttpStatus.CREATED);
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(new File(filePath)), headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping("/showAllFiles")

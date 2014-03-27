@@ -5,14 +5,15 @@ $(function() {
 			data : {
 				username : $("#username").val()
 			},
-			success : function(data) {
-				$("#tip").text(data).css("color", "red");
-				if (data != "") {
+			success : function(tip) {
+				$("#tip").text(tip.message).css("color", "red");
+				if (tip != "") {
 					$("#registe").attr("disabled", "true");
 				} else {
 					$("#registe").removeAttr("disabled");
 				}
-			}
+			},
+			dataType : "json"
 		});
 	});
 });

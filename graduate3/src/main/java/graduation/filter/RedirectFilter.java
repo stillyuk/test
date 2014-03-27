@@ -32,7 +32,7 @@ public class RedirectFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String staticResource = httpRequest.getServletPath();
-		if (staticResource.matches(".*\\.(css|js|png)")) {
+		if (staticResource.matches(".*\\.(css|js|png|html|htm|json)")) {
 			chain.doFilter(request, response);
 			return;
 		}
