@@ -12,10 +12,11 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -66,26 +67,24 @@ public class UserController {
 		return new ModelAndView("user/home", "allFiles", file.listFiles());
 	}
 
-	@RequestMapping(value = "/checkUsername", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public JsonMessage checkUsername(User user) {
+	@RequestMapping(value = "/checkUsername")
+	public ResponseEntity<JsonMessage> checkUsername(User user) {
 		List<User> users = userService.queryByUsername(user);
 		if (users == null || users.size() == 0) {
-			return new JsonMessage();
+			return new ResponseEntity<JsonMessage>(new JsonMessage(), HttpStatus.OK);
 		}
-		return new JsonMessage("此用户已被注册");
+		return new ResponseEntity<JsonMessage>(new JsonMessage("此用户已被注册"), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/userInfo")
-	@ResponseBody
-	public ModelAndView userInfo(User user) {
+	public ResponseEntity<JsonMessage> userInfo(User user) {
 		List<User> users = userService.queryByUsername(user);
 		if (users == null || users.size() == 0) {
-			return null;
+			return new ResponseEntity<JsonMessage>(new JsonMessage(), HttpStatus.OK);
 		}
 		user = users.get(0);
 		user.setGroups(null);
 		user.setRoles(null);
-		return new ModelAndView().addObject("user", user);
+		return new ResponseEntity<JsonMessage>(new JsonMessage(user), HttpStatus.OK);
 	}
 }

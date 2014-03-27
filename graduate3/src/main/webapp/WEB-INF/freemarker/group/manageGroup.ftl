@@ -26,13 +26,13 @@
 
 	function userInfo() {
 		$.ajax({
-			url: "/user/userInfo.json",
+			url: "/user/userInfo",
 			data: {
 				username : $("#username").val()
 			},
-			success: function(user){
-				$("#userInfo").append("用户名：" + user.user.username);
-				$("#userInfo").append("邮箱：" + user.user.email);
+			success: function(data){
+				$("#userInfo").append("用户名：" + data.message.username);
+				$("#userInfo").append("邮箱：" + data.message.email);
 			},
 			dataType: "json"
 		});

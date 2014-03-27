@@ -5,21 +5,20 @@ package graduation.core;
  * @since 2014-03-27
  */
 public class JsonMessage {
-	private String message = "";
+	private Object message;
 
 	public JsonMessage() {
 	}
 
-	public JsonMessage(String message) {
+	public JsonMessage(Object message) {
 		this.message = message;
 	}
 
-	public String getMessage() {
+	public Object getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(Object message) {
 		this.message = message;
 	}
-
 }

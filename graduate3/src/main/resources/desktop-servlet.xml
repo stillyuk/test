@@ -18,6 +18,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/group/**" />
+			<mvc:mapping path="/admin/**" />
 			<mvc:mapping path="/news/doAddNews.*" />
 			<mvc:exclude-mapping path="/user/login.*" />
 			<mvc:exclude-mapping path="/user/registe.*" />
